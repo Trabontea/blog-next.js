@@ -234,6 +234,15 @@ html, body {
 .blog-image {
   margin-bottom: 10px;
   text-align: center;
+  &-left {
+    float: left;
+    margin-right: 30px;
+  }
+
+  &-right {
+    float: right;
+    margin-left: 30px;
+  }
 }
 .image-alt {
   margin-top: 3px;
@@ -342,3 +351,16 @@ html, body {
     height: auto;
   }
 }
+
+ol {
+  margin-top: 50px;
+  clear: both
+}
+
+h3, h4 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+
