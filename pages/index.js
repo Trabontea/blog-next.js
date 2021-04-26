@@ -1,38 +1,66 @@
 import { Row, Col} from 'react-bootstrap';
+import useSWR from 'swr'
 import PageLayout from "components/PageLayout";
 import AuthorIntro from "components/AuthorIntro"
 import CardListItem from "components/CardListItem";
 import CardItem from "components/CardItem";
+import FilteringMenu from "../components/FilteringMenu";
 import {getAllBlogs} from "../lib/api";
+import {useState} from "react";
 
 export default function Home({blogs}) {
-  console.log('hello world');
-  console.log('blogs', blogs)
+  // console.log('hello world');
+  // console.log('blogs', blogs);
+
+  const [filter, setFilter] = useState({
+    view: {list: 0}
+  })
 
   return (
       <PageLayout className='home'>
         <AuthorIntro />
+
+        <FilteringMenu
+          filter ={filter}
+          onChange={(option, value)=> {
+            console.log('option::', option, '/ value', value)
+            setFilter({...filter, [option]: value})
+          }}
+        />
+
         <hr/>
         <Row className="mb-5">
-          {/*<Col md="10">*/}
-          {/*  <CardListItem />*/}
-          {/*</Col>*/}
-          {
-            blogs.map( blog =>
-            <Col key={blog.slug} md="4">
-              <CardItem
-                author={blog.author}
-                title={blog.title}
-                subtitle={blog.subtitle}
-                date={blog.date}
-                image={blog.coverImage}
-                slug={blog.slug}
-                link={{
-                  href:'/blogs/[slug]',
-                  as:`/blogs/${blog.slug}`
-                }}
-              />
-            </Col>
+          { blogs.map( blog =>
+            filter.view.list ?
+              <Col  key={blog.slug} md="10">
+                <CardListItem
+                    author={blog.author}
+                    title={blog.title}
+                    subtitle={blog.subtitle}
+                    date={blog.date}
+                    image={blog.coverImage}
+                    slug={blog.slug}
+                    link={{
+                      href:'/blogs/[slug]',
+                      as:`/blogs/${blog.slug}`
+                    }}
+                />
+              </Col>
+              :
+              <Col key={blog.slug} md="4">
+                <CardItem
+                  author={blog.author}
+                  title={blog.title}
+                  subtitle={blog.subtitle}
+                  date={blog.date}
+                  image={blog.coverImage}
+                  slug={blog.slug}
+                  link={{
+                    href:'/blogs/[slug]',
+                    as:`/blogs/${blog.slug}`
+                  }}
+                />
+              </Col>
             )
           }
         </Row>
