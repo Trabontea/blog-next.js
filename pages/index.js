@@ -1,20 +1,22 @@
 import { Row, Col} from 'react-bootstrap';
-import useSWR from 'swr'
 import PageLayout from "components/PageLayout";
 import AuthorIntro from "components/AuthorIntro"
 import CardListItem from "components/CardListItem";
 import CardItem from "components/CardItem";
 import FilteringMenu from "../components/FilteringMenu";
-import {getAllBlogs} from "../lib/api";
+import { getAllBlogs } from "../lib/api";
 import {useState} from "react";
+import {useGetBlogs} from "actions";
 
-export default function Home({blogs}) {
+export default function Home({blogs: initialData }) {
   // console.log('hello world');
   // console.log('blogs', blogs);
 
   const [filter, setFilter] = useState({
     view: {list: 0}
   })
+
+  const {data: blogs, error} = useGetBlogs(initialData);
 
   return (
       <PageLayout className='home'>
@@ -74,7 +76,7 @@ export default function Home({blogs}) {
 
 export async function getStaticProps() {
   // console.log('Calling getStaticProps')
-  const blogs = await getAllBlogs();
+  const blogs = await getAllBlogs({offset: 0});
   return {
     props: {
       blogs,
