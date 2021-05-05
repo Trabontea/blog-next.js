@@ -16,6 +16,7 @@ export default function Home({blogs: initialData }) {
     view: {list: 0}
   })
 
+  // ptr da
   const {data: blogs, error} = useGetBlogs(initialData);
 
   return (
