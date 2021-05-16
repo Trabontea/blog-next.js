@@ -1,5 +1,5 @@
 import {useState} from "react";
-import { Row } from 'react-bootstrap';
+import { Row, Button } from 'react-bootstrap';
 import PageLayout from "components/PageLayout";
 import AuthorIntro from "components/AuthorIntro"
 import FilteringMenu from "../components/FilteringMenu";
@@ -12,7 +12,11 @@ export default function Home({blogs}) {
 
   const [filter, setFilter] = useState({
     view: {list: 0}
-  })
+  });
+
+  // loadMore: to load more data
+  // isLoadingMore: is true whenever we are making request to fetch data
+  // isReachingEnd: is true when we loaded all of the data, data is empty (empty array)
 
   const {
     pages,
@@ -20,8 +24,8 @@ export default function Home({blogs}) {
     isReachingEnd,
     loadMore
   } = useGetBlogsPages({blogs, filter})
-
-  console.log('blog', pages)
+  // memoizedProps:
+  console.log('pages/index  -> blog', pages)
 
   return (
       <PageLayout className='home'>
@@ -39,6 +43,17 @@ export default function Home({blogs}) {
         <Row className="mb-5">
           {pages}
         </Row>
+        <div className="text-center">
+          <Button
+              onClick={loadMore}
+              disabled={isReachingEnd || isLoadingMore}
+              size="lg"
+              variant="outline-secondary"
+          >
+            {isLoadingMore ? '...' : isReachingEnd ? 'No more blogs': 'More Blogs'}
+          </Button>
+        </div>
+
       </PageLayout >
   )
 }
