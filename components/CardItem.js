@@ -1,12 +1,13 @@
 import {Card} from "react-bootstrap";
 import Link from 'next/link';
 import {urlFor} from "../lib/api";
+import moment from "moment";
 
-const CardItem = ({title, subtitle, date, image, author, link}) => {
+const CardItem = ({title, subtitle, date, image, author, link, mode = 'normal'}) => {
   // console.log('author', author)
   return(
-      <Card className={`fj-card`}>
-        <div className="card-body-wrapper">
+      <Card className={`fj-card ${mode}`}>
+        <div className={`card-body-wrapper ${!image ? 'no-image' : ''} `}>
           <Card.Header
               className="d-flex flex-row">
             <img
@@ -16,12 +17,25 @@ const CardItem = ({title, subtitle, date, image, author, link}) => {
                 width="50px"
                 alt={author?.name || 'Nobody'}/>
             <div>
-              <Card.Title className="font-weight-bold mb-1">{author?.name || 'Nobody'}</Card.Title>
-              <Card.Text className="card-date">{date}</Card.Text>
+              { mode === 'placehoder' ?
+                  <>
+                    <Card.Title className="font-weight-bold mb-1">Title</Card.Title>
+                    <Card.Text className="card-date">Date</Card.Text>
+                  </>
+                    :
+                  <>
+                    <Card.Title className="font-weight-bold mb-1">{author?.name || 'Nobody'}</Card.Title>
+                    <Card.Text className="card-date">{moment(date).locale('ro').format('L')}</Card.Text>
+                  </>
+              }
             </div>
           </Card.Header>
           <div className="view overlay">
-            <Card.Img
+            { mode === 'placeholder' ?
+              <div className='image-placeholder' />
+              :
+              image &&
+              <Card.Img
                 src={
                   urlFor(image)
                   .height(300)
@@ -30,11 +44,21 @@ const CardItem = ({title, subtitle, date, image, author, link}) => {
                   .url()}
                 className='card-image-blog'
                 alt="Card image cap"
-            />
+              />
+            }
           </div>
           <Card.Body>
-            <Card.Title className="card-main-title">{title}</Card.Title>
-            <Card.Text>{subtitle}</Card.Text>
+            { mode === 'placeholder' ?
+                <>
+                  <Card.Title className="card-main-title">Placeholder Title</Card.Title>
+                  <Card.Text>Placeholder Subtitle</Card.Text>
+                </>
+                :
+                <>
+                  <Card.Title className="card-main-title">{title}</Card.Title>
+                  <Card.Text>{subtitle}</Card.Text>
+                </>
+            }
           </Card.Body>
         </div>
         {
