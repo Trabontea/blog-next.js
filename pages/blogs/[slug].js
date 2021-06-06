@@ -4,6 +4,8 @@ import { getBlogBySlug, getAllBlogs } from "../../lib/api";
 import BlogHeader from 'components/BlogHeader';
 import { Row, Col } from 'react-bootstrap';
 import { urlFor } from "../../lib/api";
+import moment from 'moment';
+
 
 import BlogContent from "../../components/BlogContent";
 import React from "react";
@@ -13,7 +15,7 @@ const BlogDetail = ({blog}) => {
   // const router = useRouter();
   // console.log('router', router);
   // const {query} = useRouter();
-  // console.log('blog', blog);
+  // console.log('blog', blog);;
   return (
       <PageLayout className="blog-detail-page">
         <Row>
@@ -23,12 +25,14 @@ const BlogDetail = ({blog}) => {
                 subtitle={blog.subtitle}
                 coverImage={urlFor(blog.coverImage).height(300).url()}
                 author={blog.author}
-                date={blog.date}
+                date={moment(blog.date).locale('ro').format('L')}
             />
             <hr/>
-
             {/* Blog Content Here */}
+            { blog.content &&
             <BlogContent content={blog.content}/>
+            }
+
           </Col>
         </Row>
       </PageLayout>
@@ -43,6 +47,7 @@ export async function getStaticProps({params}) {
   }
 }
 
+// TOD introduce fallback
 export async function getStaticPaths() {
   const blogs = await getAllBlogs();
   const paths = blogs?.map(b => (
