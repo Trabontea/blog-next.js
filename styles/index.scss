@@ -145,7 +145,7 @@ html, body {
 
   .fj-navbar {
     &-brand {
-      color: black;
+      color:#ffffff;
       font-size: 24px;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -276,6 +276,7 @@ html, body {
 .dark {
   .card.fj-card {
     background-color: #232129;
+    color: #ffffff;
     transition: color 0s ease-out 0s, background 0.2s ease-out 0s;
     .card-body-wrapper {
       background-color: #232129;
@@ -301,6 +302,14 @@ html, body {
       }
     }
   }
+
+  //.admin-intro, .filtering-menu {
+  //  color: #ffffff;
+  //}
+  //
+  //.blog-detail-page {
+  //  color: #ffffff;
+  //}
 }
 
 .day-night-toggle.react-toggle {
@@ -365,35 +374,4 @@ h3, h4 {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-}
-
-
-.dark {
-  .card.fj-card {
-    background-color: #232129;
-    transition: color 0s ease-out 0s, background 0.2s ease-out 0s;
-    .card-body-wrapper {
-      background-color: #232129;
-      transition: color 0s ease-out 0s, background 0.2s ease-out 0s;
-    }
-
-    .card-button {
-      background-color: #9b5f5f;
-    }
-  }
-
-  .fj-navbar.fj-nav-base {
-    width: 100%;
-    padding: 20px 0px;
-
-    .fj-navbar {
-      &-brand {
-        color: #ffffff;
-      }
-
-      &-link {
-        color: #ffffff;
-      }
-    }
-  }
 }

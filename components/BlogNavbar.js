@@ -1,16 +1,16 @@
 import {Navbar, Nav} from "react-bootstrap";
 import Link from 'next/link';
-import {useTheme} from "../providers/ThemeProvider";
+import ThemeToggle from "./ThemeToggle";
 
-const BlogNavbar =() => {
-  const {theme, toggleTheme} = useTheme();
+const BlogNavbar =({theme, toggleTheme}) => {
   return <Navbar
+      variant = {theme.type}
       className="fj-navbar fj-nav-base"
       bg="transparent"
       expand="lg" >
     <Navbar.Brand className="fj-navbar-brand">
       <Link  href="/">
-        <a>Trabontea</a>
+        <a style={{color:theme.fontColor}}>Trabontea</a>
       </Link>
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -32,9 +32,7 @@ const BlogNavbar =() => {
                 <a className="fj-navbar-item fj-navbar-link">About</a>
               </Link>}
         />
-        <button className="btn btn-success" onClick={toggleTheme}>
-          {theme.type}
-        </button>
+       <ThemeToggle onChange={toggleTheme}/>
       </Nav>
     </Navbar.Collapse>
   </Navbar>
