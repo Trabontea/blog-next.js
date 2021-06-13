@@ -3,7 +3,7 @@ import { Row, Button } from 'react-bootstrap';
 import PageLayout from "components/PageLayout";
 import AuthorIntro from "components/AuthorIntro"
 import FilteringMenu from "../components/FilteringMenu";
-import { getAllBlogs } from "../lib/api";
+import { getPaginatedBlogs } from "../lib/api";
 import { useGetBlogsPages } from 'actions/paginations'
 
 export default function Home({blogs}) {
@@ -65,7 +65,7 @@ export default function Home({blogs}) {
 
 export async function getStaticProps() {
   // console.log('Calling getStaticProps')
-  const blogs = await getAllBlogs({offset: 0, date: 'desc'});
+  const blogs = await getPaginatedBlogs({offset: 0, date: 'desc'});
   return {
     props: {
       blogs,
