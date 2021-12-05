@@ -1,12 +1,13 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import { Row, Button } from 'react-bootstrap';
 import PageLayout from "components/PageLayout";
 import AuthorIntro from "components/AuthorIntro"
-import FilteringMenu from "../components/FilteringMenu";
-import { getAllBlogs } from "../lib/api";
-import { useGetBlogsPages } from 'actions/paginations'
+import FilteringMenu from "components/FilteringMenu";
+import { getPaginatedBlogs } from "../lib/api";
+import { useGetBlogsPages } from 'actions/paginations';
+import PreviewAlert from "components/PreviewAlert";
 
-export default function Home({blogs}) {
+export default function Home({blogs, preview}) {
   // console.log('hello world');
   // console.log('blogs', blogs);
 
@@ -30,6 +31,7 @@ export default function Home({blogs}) {
 
   return (
       <PageLayout className='home'>
+        {preview && <PreviewAlert />}
         <AuthorIntro />
 
         <FilteringMenu
@@ -63,12 +65,12 @@ export default function Home({blogs}) {
 // Provides props to your page
 // it will create static page
 
-export async function getStaticProps() {
+export async function getStaticProps({preview = false}) {
   // console.log('Calling getStaticProps')
-  const blogs = await getAllBlogs({offset: 0, date: 'desc'});
+  const blogs = await getPaginatedBlogs({offset: 0, date: 'desc'});
   return {
     props: {
-      blogs,
+      blogs, preview
     }
   }
 }
