@@ -20,6 +20,9 @@ export default function Home({blogs, preview}) {
   // isLoadingMore: is true whenever we are making request to fetch data
   // isReachingEnd: is true when we loaded all of the data, data is empty (empty array)
 
+  // ptr da
+  // const {data: blogs, error} = useGetBlogs(initialData);
+
   const {
     pages,
     isLoadingMore,
