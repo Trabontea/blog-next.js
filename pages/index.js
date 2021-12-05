@@ -74,7 +74,8 @@ export async function getStaticProps({preview = false}) {
   return {
     props: {
       blogs, preview
-    }
+    },
+    unstable_revalidate: 1
   }
 }
 

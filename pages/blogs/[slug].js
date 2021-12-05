@@ -39,6 +39,7 @@ const BlogDetail = ({blog, preview}) => {
             <BlogHeader
                 title={blog.title}
                 subtitle={blog.subtitle}
+                category ={blog.category}
                 coverImage={urlFor(blog.coverImage).height(300).url()}
                 author={blog.author}
                 date={moment(blog.date).locale('ro').format('L')}
@@ -61,7 +62,8 @@ export async function getStaticProps({params, preview = false, previewData}) {
 
   const blog = await getBlogBySlug(params.slug, preview);
   return {
-    props: {blog, preview}
+    props: {blog, preview},
+    unstable_revalidate: 1
   }
 }
 
@@ -69,7 +71,7 @@ export async function getStaticPaths() {
   const blogs = await getAllBlogs();
   const paths = blogs?.map(b => (
       {
-        params: { slug: b.slug }
+        params: { slug: b.slug },
       }
     )
   )
