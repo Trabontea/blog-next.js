@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 import PageLayout from "components/PageLayout";
-import { Col } from "react-bootstrap";
 import { useRouter } from "next/router";
 import { getCategories } from "lib/api";
 import { getBlogByCategories } from "lib/api";
 import Test from "../../components/Test";
+import Loader from "../../components/Loader";
 
 const CategoryPost = ({ blog }) => {
   const router = useRouter();
 
-  // if (router.isFallback) {
-  //   // return <Loader />;
-  // }
+  if (router.isFallback) {
+    return <Loader />;
+  }
   const categoryName = router.query.id;
-
-  console.log("blog", blog);
 
   return (
     <PageLayout className="home">
@@ -31,7 +29,7 @@ const CategoryPost = ({ blog }) => {
                 return item.relatedBlog.map((blogItem, index) => (
                   //console.log('blogItem', blogItem.title)
                   <Test
-                    key={blogItem._id}
+                    key={index}
                     slug={blogItem.slug.current}
                     title={blogItem.title}
                   />
@@ -53,7 +51,6 @@ export async function getStaticProps({ params }) {
   const blog = await getBlogByCategories(params.slug);
   return {
     props: { blog },
-    unstable_revalidate: 1,
   };
 }
 
