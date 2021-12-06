@@ -3,6 +3,7 @@ import { Row, Button } from 'react-bootstrap';
 import PageLayout from "components/PageLayout";
 import AuthorIntro from "components/AuthorIntro"
 import FilteringMenu from "components/FilteringMenu";
+import Categories from "components/Categories";
 import { getPaginatedBlogs } from "../lib/api";
 import { useGetBlogsPages } from 'actions/paginations';
 import PreviewAlert from "components/PreviewAlert";
@@ -36,6 +37,7 @@ export default function Home({blogs, preview}) {
       <PageLayout className='home'>
         {preview && <PreviewAlert />}
         <AuthorIntro />
+        <Categories />
 
         <FilteringMenu
           filter ={filter}

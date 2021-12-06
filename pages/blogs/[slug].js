@@ -30,7 +30,7 @@ const BlogDetail = ({blog, preview}) => {
   // const router = useRouter();
   // console.log('router', router);
   // const {query} = useRouter();
-  // console.log('blog', blog);;
+  // console.log('blog', blog);
   return (
       <PageLayout className="blog-detail-page">
         <Row>
@@ -39,7 +39,7 @@ const BlogDetail = ({blog, preview}) => {
             <BlogHeader
                 title={blog.title}
                 subtitle={blog.subtitle}
-                category ={blog.category}
+                category ={blog.category.name}
                 coverImage={urlFor(blog.coverImage).height(300).url()}
                 author={blog.author}
                 date={moment(blog.date).locale('ro').format('L')}
