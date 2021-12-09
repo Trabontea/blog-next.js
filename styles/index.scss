@@ -67,6 +67,7 @@ body {
 
   .card-main-title {
     font-size: 22px;
+    height: 60px;
   }
 
   .card-header {
@@ -112,6 +113,10 @@ body {
   }
 
   &.fj-card-list {
+    .card-main-title {
+      height: auto;
+    }
+
     .card-body-wrapper {
       min-height: 180px;
       // position: relative;
@@ -246,6 +251,11 @@ body {
 .blog-image {
   margin-bottom: 10px;
   text-align: center;
+
+  > img {
+    max-width: 100%;
+  }
+
   &-left {
     float: left;
     margin-right: 30px;
@@ -390,4 +400,32 @@ h4 {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.view.overlay {
+  height: 150px;
+  position: relative;
+  // display: inline-block;
+  display: block;
+  overflow: hidden;
+  margin: 0;
+
+  > img {
+    object-fit: cover;
+    height: 100%;
+  }
+}
+
+blockquote {
+  position: relative;
+  color: #999;
+  font-size: 1.25em;
+  font-family: Georgia, Times New Roman, Times, serif;
+  font-style: italic;
+  margin: 0;
+  padding: 0.5em 0.5em 0.5em 0.5em;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-origin: border-box;
+  background-size: 2em;
 }

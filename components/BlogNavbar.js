@@ -1,41 +1,46 @@
-import {Navbar, Nav} from "react-bootstrap";
-import Link from 'next/link';
+import { Navbar, Nav } from "react-bootstrap";
+import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 
-const BlogNavbar =({theme, toggleTheme}) => {
-  return <Navbar
-      variant = {theme.type}
+const BlogNavbar = ({ theme, toggleTheme }) => {
+  return (
+    <Navbar
+      variant={theme.type}
       className="fj-navbar fj-nav-base"
       bg="transparent"
-      expand="lg" >
-    <Navbar.Brand className="fj-navbar-brand">
-      <Link  href="/">
-        <a style={{color:theme.fontColor}}>Trabontea</a>
-      </Link>
-    </Navbar.Brand>
-    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-    <Navbar.Collapse id="basic-navbar-nav">
-      <Nav className="ml-auto">
-        <Nav.Link
-          className="fj-navbar-item fj-navbar-link"
-          href='/'
-          as={()=>
-            <Link href='/'>
-              <a className="fj-navbar-item fj-navbar-link">Home</a>
-            </Link>}
-        />
-        <Nav.Link
+      expand="lg"
+    >
+      <Navbar.Brand className="fj-navbar-brand">
+        <Link href="/">
+          <a style={{ color: theme.fontColor }}>TrabonteaMusic </a>
+        </Link>
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="ml-auto">
+          <Nav.Link
             className="fj-navbar-item fj-navbar-link"
-            href='about'
-            as={()=>
-              <Link href='/about'>
+            href="/"
+            as={() => (
+              <Link href="/">
+                <a className="fj-navbar-item fj-navbar-link">Home</a>
+              </Link>
+            )}
+          />
+          <Nav.Link
+            className="fj-navbar-item fj-navbar-link"
+            href="about"
+            as={() => (
+              <Link href="/about">
                 <a className="fj-navbar-item fj-navbar-link">About</a>
-              </Link>}
-        />
-       <ThemeToggle onChange={toggleTheme}/>
-      </Nav>
-    </Navbar.Collapse>
-  </Navbar>
-}
+              </Link>
+            )}
+          />
+          <ThemeToggle onChange={toggleTheme} />
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+  );
+};
 
 export default BlogNavbar;

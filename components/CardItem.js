@@ -8,6 +8,7 @@ const CardItem = ({
   subtitle,
   date,
   image,
+  category,
   author,
   link,
   mode = "normal",
@@ -74,8 +75,15 @@ const CardItem = ({
                   </>
                 ) : (
                   <>
-                    <Card.Title className="card-main-title">{title}</Card.Title>
-                    <Card.Text>{subtitle}</Card.Text>
+                    <Card.Title className="card-main-title">
+                      {title.length > 40 ? title.substr(0, 40) + "..." : title}
+                    </Card.Title>
+                    <Card.Text>
+                      {subtitle.length > 40
+                        ? title.substr(0, 40) + "..."
+                        : subtitle}
+                    </Card.Text>
+                    <Card.Text>{category}</Card.Text>
                     <Card.Text>Reading More</Card.Text>
                   </>
                 )}

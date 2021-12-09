@@ -9,6 +9,8 @@ import Loader from "../../components/Loader";
 const CategoryPost = ({ blog }) => {
   const router = useRouter();
 
+  console.log(blog);
+
   if (router.isFallback) {
     return <Loader />;
   }
@@ -20,14 +22,11 @@ const CategoryPost = ({ blog }) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="col-span-1 lg:col-span-8">
             <h1> {categoryName} </h1>
-            <h2>HellO page</h2>
+            <h2>This is a page with {categoryName} albums</h2>
 
             {blog.map((item) => {
-              //console.log("item", item, item.slug === categoryName);
-
               if (item.slug === categoryName) {
                 return item.relatedBlog.map((blogItem, index) => (
-                  //console.log('blogItem', blogItem.title)
                   <Test
                     key={index}
                     slug={blogItem.slug.current}
